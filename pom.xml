@@ -56,6 +56,16 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!--Starting with Spring Boot 2.4+, hibernate-validator needs to be added manually (not included in springboot-starter-web-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+<!--no need to explicitly define jackon's version, as Spring Boot’s parent pom.xml project will handle the version number for you-->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
 	</dependencies>
 
 
