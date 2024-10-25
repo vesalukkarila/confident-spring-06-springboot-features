@@ -6,7 +6,13 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.3.1</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from repository-->
+		<!-- (line above)You’ll notice that your Maven project inherits from a spring-boot-starter-parent project.
+		It does this for dependency management reasons. Whereas you would have to specify versions
+		of third party libraries in your pom.xml file without this inheritance,
+		Spring Boot pre-defines a ton of fixed third-party dependency versions in that parent project for you.
+		You can lookup all the dependency with mvn dependency:tree-->
+
 	</parent>
 	<groupId>com.vesalukkarila</groupId>
 	<artifactId>simple-webapp-springboot</artifactId>
@@ -26,22 +32,37 @@
 		<tag/>
 		<url/>
 	</scm>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<!--sets up Spring, Spring MVC and a lot more. There’s also a dependency
+		that enables Spring Boot’s testing facilities (think: the @SpringBootTest annotation etc.)-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>	<!--@springboottest annotations etc-->
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 
+
+	<!--  Spring Boot Maven plugin, which, among other things,
+	will make sure that after building your project with mvn clean package,
+	you’ll get a correctly working, executable fat .jar.
+	somewhat equivalent to the shade plugin, though it works entirely differently, under the hood.-->
 	<build>
 		<plugins>
 			<plugin>
