@@ -7,7 +7,7 @@ COPY src/ src/
 RUN mvn clean install
 
 FROM ${JAVA_VARIANT}:${JAVA_VERSION} AS runtime
-ARG JAR_FILE=target/pdfinvoices-1.0-SNAPSHOT.jar
+ARG JAR_FILE=target/simple-webapp-springboot-0.0.1-SNAPSHOT.jar
 COPY --from=build /usr/src/app/${JAR_FILE} ${JAR_FILE}
 ENV JAR_FILE=${JAR_FILE}
 CMD ["sh", "-c", "java -jar ${JAR_FILE}"]
